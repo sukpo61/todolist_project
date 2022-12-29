@@ -5,7 +5,7 @@ export const __getTodo = createAsyncThunk(
   "todos/getTodo",
   async (_, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3002/todos");
+      const data = await axios.get("http://localhost:3003/todos");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -18,8 +18,8 @@ export const __addTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      await axios.post("http://localhost:3002/todos", payload);
-      const data = await axios.get("http://localhost:3002/todos");
+      await axios.post("http://localhost:3003/todos", payload);
+      const data = await axios.get("http://localhost:3003/todos");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -32,8 +32,8 @@ export const __deleteTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      await axios.delete(`http://localhost:3002/todos/${payload}`);
-      const data = await axios.get("http://localhost:3002/todos");
+      await axios.delete(`http://localhost:3003/todos/${payload}`);
+      const data = await axios.get("http://localhost:3003/todos");
       console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -47,8 +47,8 @@ export const __updateTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      await axios.patch(`http://localhost:3002/todos/${payload.id}`, payload);
-      const data = await axios.get("http://localhost:3002/todos");
+      await axios.patch(`http://localhost:3003/todos/${payload.id}`, payload);
+      const data = await axios.get("http://localhost:3003/todos");
       console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -61,7 +61,7 @@ export const __updateTodo = createAsyncThunk(
 //   "todos/getTodos",
 //   async (payload, thunkAPI) => {
 //     try {
-//       const data = await axios.get("http://localhost:3002/todos");
+//       const data = await axios.get("http://localhost:3003/todos");
 //       console.log(data);
 //     } catch (error) {
 //       console.log(error);

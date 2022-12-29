@@ -29,25 +29,28 @@ const TodoAddform = () => {
   };
   return (
     <TodoAddformWrap>
-      <form onSubmit={onSubmitHandler}>
+      <TodoForm onSubmit={onSubmitHandler}>
         <TodoInput
           className="title"
           type="text"
+          placeholder="제목을 입력하세요"
           value={title}
           onChange={(e) => {
+            console.log(title);
             setTitle(e.target.value);
           }}
         />
         <TodoInput
           className="contents"
           type="text"
+          placeholder="내용을 입력하세요"
           value={content}
           onChange={(e) => {
             setContent(e.target.value);
           }}
         />
-        <CusttomButton>추가하기</CusttomButton>
-      </form>
+        <CusttomButton>추가</CusttomButton>
+      </TodoForm>
     </TodoAddformWrap>
   );
 };
@@ -56,16 +59,22 @@ export default TodoAddform;
 
 const TodoAddformWrap = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: 24px;
-  padding: 30px;
+`;
+const TodoForm = styled.form`
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
 `;
 
 const TodoInput = styled.input`
   border: 1px solid #eee;
-  margin: 0 24px;
+  margin: 0 12px;
   height: 25px;
-  width: 300px;
+  width: 40%;
   border-radius: 12px;
   outline: none;
-  padding: 0 10px;
 `;

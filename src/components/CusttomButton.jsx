@@ -10,9 +10,11 @@ const CusttomButton = ({
   BorderRadius,
   Border,
   FontWeight,
+  className,
 }) => {
   return (
     <Button
+      className={className}
       onClick={onClickFuntion}
       Margin={Margin}
       Color={Color}
@@ -27,6 +29,7 @@ const CusttomButton = ({
 };
 
 CusttomButton.defaultProps = {
+  className: "",
   Color: "#000000",
   BorderRadius: "30px",
   Border: "0.5px solid #a5a5a5;",
