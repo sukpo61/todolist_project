@@ -12,7 +12,10 @@ const TodoAddform = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (title === "") return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
+    if (content === "" || title === "") {
+      window.alert("제목및 내용을 입력하세요");
+      return;
+    }
 
     let NewData = {
       id: uuid(),
@@ -64,7 +67,6 @@ const TodoAddformWrap = styled.div`
 `;
 const TodoForm = styled.form`
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   gap: 24px;
