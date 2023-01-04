@@ -10,30 +10,32 @@ const TodoAddform = () => {
   // const [title, setTitle] = useState("");
   // const [content, setContent] = useState("");
 
-  const { title, setinputTitle, content, setinputContent } = useInput("");
+  const { title, setinputTitle, content, setinputContent, onSubmitHandler } =
+    useInput("");
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (content === "" || title === "") {
-      window.alert("제목및 내용을 입력하세요");
-      return;
-    }
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (content === "" || title === "") {
+  //     window.alert("제목및 내용을 입력하세요");
+  //     return;
+  //   }
 
-    let NewData = {
-      id: uuid(),
-      title,
-      content,
-      isDone: false,
-      displaytoggle: true,
-    };
+  //   let NewData = {
+  //     id: uuid(),
+  //     title,
+  //     content,
+  //     isDone: false,
+  //     displaytoggle: true,
+  //   };
 
-    dispatch(__addTodo(NewData));
+  //   dispatch(__addTodo(NewData));
 
-    // setTitle("");
-    // setContent("");
-  };
+  //   // setTitle("");
+  //   // setContent("");
+  // };
+
   return (
     <TodoAddformWrap>
       <TodoForm onSubmit={onSubmitHandler}>
