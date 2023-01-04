@@ -4,10 +4,14 @@ import { __addTodo } from "../redux/modules/todos";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import CusttomButton from "./CusttomButton";
+import useInput from "../hooks/useInput";
 
 const TodoAddform = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [content, setContent] = useState("");
+
+  const { title, setinputTitle, content, setinputContent } = useInput("");
+
   const dispatch = useDispatch();
 
   const onSubmitHandler = (e) => {
@@ -27,8 +31,8 @@ const TodoAddform = () => {
 
     dispatch(__addTodo(NewData));
 
-    setTitle("");
-    setContent("");
+    // setTitle("");
+    // setContent("");
   };
   return (
     <TodoAddformWrap>
@@ -38,19 +42,14 @@ const TodoAddform = () => {
           type="text"
           placeholder="제목을 입력하세요"
           value={title}
-          onChange={(e) => {
-            console.log(title);
-            setTitle(e.target.value);
-          }}
+          onChange={setinputTitle}
         />
         <TodoInput
           className="contents"
           type="text"
           placeholder="내용을 입력하세요"
           value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
+          onChange={setinputContent}
         />
         <CusttomButton>추가</CusttomButton>
       </TodoForm>
