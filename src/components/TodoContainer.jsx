@@ -34,7 +34,6 @@ const TodoContainer = ({ todo, index }) => {
       ...todo,
       displaytoggle: !todo.displaytoggle,
     };
-    console.log(NewTodo);
 
     dispatch(__updateTodo(NewTodo));
   };

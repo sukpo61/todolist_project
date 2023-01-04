@@ -7,7 +7,6 @@ const TodoPage = () => {
   const { todos } = useSelector((state) => state.todos);
   const param = useParams();
   const todo = todos.find((todo) => todo.id === param.id);
-  console.log(todo);
   return (
     <TodoPageWrap>
       <Content>
