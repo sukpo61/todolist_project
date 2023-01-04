@@ -1,42 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import uuid from "react-uuid";
+import { useState } from "react";
 import { __addTodo } from "../redux/modules/todos";
 
 const useInput = (initialValue = "") => {
-  const [title, setTitle] = useState(initialValue);
-  const [content, setContent] = useState(initialValue);
-  const dispatch = useDispatch();
+  const [value, setValue] = useState(initialValue);
 
-  const setinputTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const setinputContent = (e) => {
-    setContent(e.target.value);
+  const setinputValue = (e) => {
+    setValue(e.target.value);
   };
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (content === "" || title === "") {
-      window.alert("제목및 내용을 입력하세요");
-      return;
-    }
-
-    let NewData = {
-      id: uuid(),
-      title,
-      content,
-      isDone: false,
-      displaytoggle: true,
-    };
-
-    dispatch(__addTodo(NewData));
-
-    setTitle("");
-    setContent("");
+  const reset = () => {
+    setValue("");
   };
 
-  return { title, setinputTitle, content, setinputContent, onSubmitHandler };
+  return [value, setinputValue, reset];
 };
 
 export default useInput;
