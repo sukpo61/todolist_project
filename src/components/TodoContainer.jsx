@@ -6,17 +6,18 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const TodoContainer = ({ todo, index }) => {
+const TodoContainer = ({ todo }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [title, setTitle] = useState(todo.title);
   const [content, setContent] = useState(todo.content);
-
+  // const canSave = [content, title].every(Boolean);
   const UpdateTodo = () => {
-    if (content === "" || title === "") {
-      window.alert("제목및 내용을 입력하세요");
-      return;
-    }
+    // if (content === "" || title === "") {
+    //   window.alert("제목및 내용을 입력하세요");
+    //   return;
+    // }
     console.log(todo);
     let NewTodo = {
       ...todo,
@@ -109,6 +110,9 @@ const TodoContainer = ({ todo, index }) => {
 };
 
 export default TodoContainer;
+
+// Tailwind
+// https://www.youtube.com/watch?v=pYaamz6AyvU&list=PL0Zuz27SZ-6M8znNpim8dRiICRrP5HPft
 
 const TodoInput = styled.input`
   border: 1px solid #eee;
