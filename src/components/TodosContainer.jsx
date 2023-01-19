@@ -14,11 +14,7 @@ const TodosContainer = ({ isActive }) => {
         {todos.map(
           (todo, index) =>
             todo.isDone === isActive && (
-              <TodoContainer
-                key={todo.id}
-                todo={todo}
-                index={index + 1}
-              ></TodoContainer>
+              <TodoContainer key={todo.id} todo={todo}></TodoContainer>
             )
         )}
       </Contents>

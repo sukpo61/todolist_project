@@ -77,54 +77,58 @@ const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {},
-  extraReducers: {
-    [__getTodo.pending]: (state) => {
+  extraReducers: (builder) => {
+    // getTodo
+    builder.addCase(__getTodo.pending, (state, action) => {
       state.isLoading = true;
-    },
-    [__getTodo.fulfilled]: (state, action) => {
+    });
+    builder.addCase(__getTodo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.todos = action.payload;
-    },
-    [__getTodo.rejected]: (state, action) => {
+    });
+    builder.addCase(__getTodo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    });
 
-    [__addTodo.pending]: (state) => {
+    // addTodo
+    builder.addCase(__addTodo.pending, (state, action) => {
       state.isLoading = true;
-    },
-    [__addTodo.fulfilled]: (state, action) => {
+    });
+    builder.addCase(__addTodo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.todos = action.payload;
-    },
-    [__addTodo.rejected]: (state, action) => {
+    });
+    builder.addCase(__addTodo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    });
 
-    [__deleteTodo.pending]: (state) => {
+    // deleteTodo
+    builder.addCase(__deleteTodo.pending, (state, action) => {
       state.isLoading = true;
-    },
-    [__deleteTodo.fulfilled]: (state, action) => {
+    });
+    builder.addCase(__deleteTodo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.todos = action.payload;
-    },
-    [__deleteTodo.rejected]: (state, action) => {
+    });
+    builder.addCase(__deleteTodo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    });
 
-    [__updateTodo.pending]: (state) => {
+    // updateTodo
+    builder.addCase(__updateTodo.pending, (state, action) => {
       state.isLoading = true;
-    },
-    [__updateTodo.fulfilled]: (state, action) => {
+    });
+    builder.addCase(__updateTodo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.todos = action.payload;
-    },
-    [__updateTodo.rejected]: (state, action) => {
+    });
+    builder.addCase(__updateTodo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    });
   },
 });
 

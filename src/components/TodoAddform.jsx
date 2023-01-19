@@ -4,10 +4,14 @@ import { __addTodo } from "../redux/modules/todos";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import CusttomButton from "./CusttomButton";
+import { useInput } from "../hooks";
+
+// https://tkdodo.eu/blog/practical-react-query
 
 const TodoAddform = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle, resetTitle] = useInput("");
+  const [content, setContent, resetContent] = useInput("");
+
   const dispatch = useDispatch();
 
   const onSubmitHandler = (e) => {
@@ -27,9 +31,10 @@ const TodoAddform = () => {
 
     dispatch(__addTodo(NewData));
 
-    setTitle("");
-    setContent("");
+    resetTitle();
+    resetContent();
   };
+
   return (
     <TodoAddformWrap>
       <TodoForm onSubmit={onSubmitHandler}>
@@ -38,19 +43,14 @@ const TodoAddform = () => {
           type="text"
           placeholder="제목을 입력하세요"
           value={title}
-          onChange={(e) => {
-            console.log(title);
-            setTitle(e.target.value);
-          }}
+          onChange={setTitle}
         />
         <TodoInput
           className="contents"
           type="text"
           placeholder="내용을 입력하세요"
           value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
+          onChange={setContent}
         />
         <CusttomButton>추가</CusttomButton>
       </TodoForm>
