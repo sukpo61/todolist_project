@@ -1,21 +1,29 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { __addTodo } from "../redux/modules/todos";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import CusttomButton from "./CusttomButton";
 import { useInput } from "../hooks";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
+import { SERVER_URI } from "../api/todoquery";
+import { addTodo } from "../api/todoquery";
 
 // https://tkdodo.eu/blog/practical-react-query
 
 const TodoAddform = () => {
   const [title, setTitle, resetTitle] = useInput("");
   const [content, setContent, resetContent] = useInput("");
+  const queryClient = useQueryClient();
 
-  const dispatch = useDispatch();
+  const addMutate = useMutation(addTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
     if (content === "" || title === "") {
       window.alert("제목및 내용을 입력하세요");
       return;
@@ -29,7 +37,7 @@ const TodoAddform = () => {
       displaytoggle: true,
     };
 
-    dispatch(__addTodo(NewData));
+    addMutate.mutate(NewData);
 
     resetTitle();
     resetContent();

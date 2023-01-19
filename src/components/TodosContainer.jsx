@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { __getTodo } from "../redux/modules/todos";
 import TodoContainer from "./TodoContainer";
 import { getTodos } from "../api/todoquery";
 import { useQuery } from "react-query";
 
 const TodosContainer = ({ isActive }) => {
-  const { data: todos } = useQuery({
-    queryKey: ["todo"],
-    queryFn: getTodos,
-  });
+  const { isLoading, isError, data } = useQuery("todos", getTodos);
 
-  // const { todos } = useSelector((state) => state.todos);
+  if (isLoading) {
+    return <p>로딩중입니다....!</p>;
+  }
+
+  if (isError) {
+    return <p>오류가 발생하였습니다...!</p>;
+  }
 
   return (
     <TodosContainerWrap>
       {isActive ? <Title>Done</Title> : <Title>Working</Title>}
       <Contents>
-        {todos.map(
+        {data?.map(
           (todo, index) =>
             todo.isDone === isActive && (
               <TodoContainer key={todo.id} todo={todo}></TodoContainer>

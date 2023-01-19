@@ -1,17 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 import CusttomButton from "./CusttomButton";
-import { __deleteTodo, __updateTodo } from "../redux/modules/todos";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteTodo, updateTodo } from "../api/todoquery";
+import { useMutation, useQueryClient } from "react-query";
 
 const TodoContainer = ({ todo }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [title, setTitle] = useState(todo.title);
   const [content, setContent] = useState(todo.content);
+
+  const queryClient = useQueryClient();
+
+  const deleteMutate = useMutation(deleteTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
+  const updateMutate = useMutation(updateTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
+
   // const canSave = [content, title].every(Boolean);
   const UpdateTodo = () => {
     // if (content === "" || title === "") {
@@ -27,7 +41,7 @@ const TodoContainer = ({ todo }) => {
     };
     console.log(NewTodo);
 
-    dispatch(__updateTodo(NewTodo));
+    updateMutate.mutate(NewTodo);
   };
 
   const ToggleTodo = () => {
@@ -36,7 +50,7 @@ const TodoContainer = ({ todo }) => {
       displaytoggle: !todo.displaytoggle,
     };
 
-    dispatch(__updateTodo(NewTodo));
+    updateMutate.mutate(NewTodo);
   };
 
   const ToggleisDone = () => {
@@ -46,7 +60,7 @@ const TodoContainer = ({ todo }) => {
     };
     console.log(NewTodo);
 
-    dispatch(__updateTodo(NewTodo));
+    updateMutate.mutate(NewTodo);
   };
 
   return (
@@ -89,7 +103,7 @@ const TodoContainer = ({ todo }) => {
         <ButtonsWrap>
           <CusttomButton
             onClickFuntion={() => {
-              dispatch(__deleteTodo(todo.id));
+              deleteMutate.mutate(todo.id);
             }}
           >
             삭제
